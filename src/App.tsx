@@ -72,10 +72,9 @@ const Wrapper = styled.div`
 display:flex;
 max-width:680px;
 width:100%;
-margin:0 auto;
+margin:50px auto;
 justify-content: center;
-align-items:center;
-height:100vh;
+
 
 `;
 
@@ -85,7 +84,27 @@ width:100%;
 gap:10px;
 grid-template-columns: repeat(3,1fr);
 `;
+const Title = styled.h1`
+text-align:center;
+`;
+const SiteInfo = styled.h3`
+text-align:justify;
+max-width:1080px;
+margin:0 auto;
+padding-bottom:50px;
 
+`;
+const AddForm = styled.form`
+text-align:center;
+ input {
+  width:300px;
+  height:30px;
+  font-size:20px;
+  border:2px solid #111;
+  color:#111;
+  padding:5px;
+ }
+`;
 interface IAddForm {
   addBoard:string;
 
@@ -163,10 +182,16 @@ function App() {
   //console.log('aaaa',addB);
   return (
       <div>
-      <form onSubmit={handleSubmit(addV)}>
-        <input {...register("addBoard",{required:true})} type="text" placeholder='보드추가'/>
-      </form>
+        <Title>Todos Sample</Title>
+        <SiteInfo>
+This is a Todos sample for using React-hook-form,beautiful-dnd.
+Enter content on the board and move the entered content between boards
+You can add boards.</SiteInfo>
+        <AddForm onSubmit={handleSubmit(addV)}>
+          <input {...register("addBoard",{required:true})} type="text" placeholder='보드추가'/>
+        </AddForm>
       <DragDropContext onDragEnd={onDragEnd}>
+        
         <Wrapper>
           <Boards>
             {Object.keys(toDos).map(boardId=><Board boardId={boardId} key={boardId} toDos={toDos[boardId]}/>)}
